@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
-import {About} from './screens';
+import client from './apollo';
+import {ApolloProvider} from '@apollo/react-hooks';
+import RootStackNavigator from './navigation/RootStackNavigator';
 
 export default class App extends Component {
   render() {
     return (
-      <SafeAreaView style={{flex: 1}}>
-        <About />
-      </SafeAreaView>
+      <ApolloProvider client={client}>
+        <RootStackNavigator />
+      </ApolloProvider>
     );
   }
 }
