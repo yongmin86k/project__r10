@@ -12,6 +12,19 @@ const themes = {
       paddingLeft: 16,
     },
   },
+
+  typography: {
+    default: {
+      fontFamily: 'Montserrat-Light',
+      fontSize: 18,
+      marginVertical: 12,
+    },
+    header: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 32,
+      marginVertical: 12,
+    },
+  },
 };
 
 export default themes;
