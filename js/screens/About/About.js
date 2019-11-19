@@ -1,8 +1,31 @@
 import React from 'react';
-import {ScrollView, ImageBackground, View, Text} from 'react-native';
+import {useQuery} from '@apollo/react-hooks';
+import {QUERY_ALL_CONDUCTS} from '../../apollo/queries';
+import {ScrollView, FlatList, ImageBackground, View, Text} from 'react-native';
 import {Typo__Default, Typo__Header} from '../../components';
-import {THEME} from '../../config';
 import styles from './styles';
+
+const CodeOfConducts = () => {
+  const {loading, error, data} = useQuery(QUERY_ALL_CONDUCTS, {
+    variables: {order: 'order_ASC'},
+  });
+  if (loading) return <Typo__Default>Loading...</Typo__Default>;
+  if (error) return <Typo__Default>Error: {error}</Typo__Default>;
+  if (data) {
+    return (
+      <FlatList
+        data={data.allConducts}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <View>
+            <Text style={styles.accordionHeader}>{item.title}</Text>
+            <Typo__Default>{item.description}</Typo__Default>
+          </View>
+        )}
+      />
+    );
+  }
+};
 
 const About = () => (
   <ScrollView style={styles.default}>
@@ -20,6 +43,8 @@ const About = () => (
       BC.
     </Typo__Default>
     <Typo__Header>Code of Conduct</Typo__Header>
+    <CodeOfConducts />
+    <Typo__Default>© RED Academy 2019</Typo__Default>
   </ScrollView>
 );
 
