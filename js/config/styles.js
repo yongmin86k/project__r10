@@ -1,3 +1,5 @@
+import {Platform} from 'react-native';
+
 const themes = {
   color: {
     greyM: '#999',
@@ -5,6 +7,7 @@ const themes = {
     blue: '#8797D6',
     purple: '#9963ea',
     red: '#cf392a',
+    white: '#fff',
   },
   padding: {
     default: {
@@ -12,7 +15,6 @@ const themes = {
       paddingLeft: 16,
     },
   },
-
   typography: {
     default: {
       fontFamily: 'Montserrat-Light',
@@ -24,6 +26,14 @@ const themes = {
       fontSize: 32,
       marginVertical: 12,
     },
+    ...Platform.select({
+      ios: {
+        fontMain: 'Montserrat',
+      },
+      android: {
+        fontMain: 'Montserrat-Regular',
+      },
+    }),
   },
 };
 

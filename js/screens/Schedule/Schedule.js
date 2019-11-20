@@ -1,8 +1,18 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 
-const Schedule = () => {
-  return <Text>Hello Schedule</Text>;
+const Schedule = ({navigation}) => {
+  return (
+    <View>
+      <Text>Hello Schedule</Text>
+      <Button
+        title="Go to session"
+        onPress={() => {
+          navigation.push('Session', []);
+        }}
+      />
+    </View>
+  );
 };
 
 export default Schedule;
