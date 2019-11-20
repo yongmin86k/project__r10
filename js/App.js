@@ -3,12 +3,15 @@ import client from './apollo';
 import {ApolloProvider} from '@apollo/react-hooks';
 import RootStackNavigator from './navigation/RootStackNavigator';
 import SafeAreaView from 'react-native-safe-area-view';
+import FavesProvider from './context/FavesContext';
 
 export default class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <RootStackNavigator />
+        <FavesProvider>
+          <RootStackNavigator />
+        </FavesProvider>
         <SafeAreaView
           style={{
             position: 'absolute',
