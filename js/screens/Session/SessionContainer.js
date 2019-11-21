@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {FavesContext} from '../../context/FavesContext';
 import Session from './Session';
 
 class SessionContainer extends Component {
@@ -10,7 +11,18 @@ class SessionContainer extends Component {
     const {navigation} = this.props;
     const {params} = navigation.state;
 
-    return <Session data={params[0]} />;
+    return (
+      <FavesContext.Consumer>
+        {({faveIds, addFaveSession, removeFaveSession}) => (
+          <Session
+            data={params[0]}
+            faveIds={faveIds}
+            addFaveSession={addFaveSession}
+            removeFaveSession={removeFaveSession}
+          />
+        )}
+      </FavesContext.Consumer>
+    );
   }
 }
 

@@ -42,8 +42,8 @@ const defaultOptions = navigation => {
               }}
               name="md-menu"
               color="#fff"
-              size={36}
-              style={{marginLeft: 16}}
+              size={THEME.spacing * 2}
+              style={{marginLeft: THEME.spacing}}
             />
           ),
         }

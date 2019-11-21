@@ -5,9 +5,16 @@ const styles = StyleSheet.create({
   view: {
     ...THEME.padding.theme,
   },
+  wrapHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
   subHeader: {
     ...THEME.typography.subHeader,
   },
+  iconHeart: {width: 32},
   time: {
     ...THEME.typography.subHeader,
     color: THEME.color.red,

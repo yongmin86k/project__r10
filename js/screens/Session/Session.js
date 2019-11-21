@@ -12,19 +12,25 @@ import {Separator__Table, Typo__Default, Typo__Header} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {THEME} from '../../config';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Session = ({data}) => {
+const Session = ({data, faveIds, addFaveSession, removeFaveSession}) => {
   const time = moment(data.startTime).format('hh:mm A');
+  const isFave = faveIds.includes(data.id);
+
   return (
     <ScrollView style={styles.view}>
-      <Text style={styles.subHeader}>{data.location}</Text>
-
-      <Icon
-        name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
-        size={16}
-        color="red"
-      />
+      <View style={styles.wrapHeader}>
+        <Text style={styles.subHeader}>{data.location}</Text>
+        {isFave ? (
+          <Ionicons
+            name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+            style={styles.iconHeart}
+            size={24}
+            color="red"
+          />
+        ) : null}
+      </View>
 
       <Typo__Header>{data.title}</Typo__Header>
       <Text style={styles.time}>{time}</Text>
@@ -39,7 +45,7 @@ const Session = ({data}) => {
       <Separator__Table />
       <TouchableOpacity
         onPress={() => {
-          console.log('Pressed');
+          !isFave ? addFaveSession(data.id) : removeFaveSession(data.id);
         }}>
         <LinearGradient
           colors={[THEME.color.purple, THEME.color.blue]}
@@ -47,7 +53,7 @@ const Session = ({data}) => {
           end={{x: 1.0, y: 0.0}}
           style={styles.buttonBG}>
           <Text accessibilityRole="button" style={styles.button}>
-            Add to Faves
+            {!isFave ? 'Add to Faves' : 'Remove from Faves'}
           </Text>
         </LinearGradient>
       </TouchableOpacity>
