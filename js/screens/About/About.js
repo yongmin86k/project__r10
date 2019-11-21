@@ -1,31 +1,9 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
-import {QUERY_ALL_CONDUCTS} from '../../apollo/queries';
-import {ScrollView, FlatList, ImageBackground, View, Text} from 'react-native';
+import {ScrollView, ImageBackground} from 'react-native';
 import {Typo__Default, Typo__Header} from '../../components';
 import styles from './styles';
 
-const CodeOfConducts = () => {
-  const {loading, error, data} = useQuery(QUERY_ALL_CONDUCTS, {
-    variables: {order: 'order_ASC'},
-  });
-  if (loading) return <Typo__Default>Loading...</Typo__Default>;
-  if (error) return <Typo__Default>Error: {error}</Typo__Default>;
-  if (data) {
-    return (
-      <>
-        {data.allConducts.map(element => (
-          <View key={element.id}>
-            <Text style={styles.accordionHeader}>{element.title}</Text>
-            <Typo__Default>{element.description}</Typo__Default>
-          </View>
-        ))}
-      </>
-    );
-  }
-};
-
-const About = () => (
+const About = ({CodeOfConducts}) => (
   <>
     <ScrollView style={styles.default}>
       <ImageBackground
