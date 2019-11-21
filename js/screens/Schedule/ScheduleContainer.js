@@ -33,7 +33,7 @@ const SessionLists = ({navigation}) => {
           return (
             <TouchableOpacity
               onPress={() => {
-                navigation.push('Session');
+                navigation.push('Session', [item]);
               }}>
               <Session__Content title={item.title} location={item.location} />
             </TouchableOpacity>

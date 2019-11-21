@@ -7,7 +7,10 @@ class SessionContainer extends Component {
   };
 
   render() {
-    return <Session />;
+    const {navigation} = this.props;
+    const {params} = navigation.state;
+
+    return <Session data={params[0]} />;
   }
 }
 

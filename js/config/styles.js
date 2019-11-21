@@ -8,11 +8,15 @@ const themes = {
     purple: '#9963ea',
     red: '#cf392a',
     white: '#fff',
+    black: '#000',
   },
+  spacing: 16,
   padding: {
+    theme: {
+      padding: 16,
+    },
     default: {
-      paddingRight: 16,
-      paddingLeft: 16,
+      paddingHorizontal: 16,
     },
   },
   typography: {
@@ -20,11 +24,17 @@ const themes = {
       fontFamily: 'Montserrat-Light',
       fontSize: 18,
       marginVertical: 12,
+      lineHeight: 30,
     },
     header: {
       fontFamily: 'Montserrat-Regular',
       fontSize: 32,
       marginVertical: 12,
+    },
+    subHeader: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 18,
+      color: '#999',
     },
     ...Platform.select({
       ios: {
