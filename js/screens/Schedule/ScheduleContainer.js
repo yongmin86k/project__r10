@@ -11,6 +11,7 @@ import {
   Typo__Default,
 } from '../../components';
 import formatSessionData from '../../lib/dataFormatHelpers';
+import {FavesContext} from '../../context/FavesContext';
 
 const SessionLists = ({navigation}) => {
   const {loading, error, data} = useQuery(QUERY_ALL_SESSIONS, {
@@ -22,25 +23,35 @@ const SessionLists = ({navigation}) => {
     const formattedData = formatSessionData(data.allSessions);
 
     return (
-      <SectionList
-        sections={formattedData}
-        keyExtractor={item => item.id}
-        renderSectionHeader={({section: {title}}) => {
-          const time = moment(title).format('hh:mm A');
-          return <Session__Header>{`${time}`}</Session__Header>;
-        }}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.push('Session', [item]);
-              }}>
-              <Session__Content title={item.title} location={item.location} />
-            </TouchableOpacity>
-          );
-        }}
-        ItemSeparatorComponent={() => <Separator__Table />}
-      />
+      <FavesContext.Consumer>
+        {({faveIds}) => (
+          <SectionList
+            sections={formattedData}
+            keyExtractor={item => item.id}
+            renderSectionHeader={({section: {title}}) => {
+              const time = moment(title).format('hh:mm A');
+              return <Session__Header>{`${time}`}</Session__Header>;
+            }}
+            renderItem={({item}) => {
+              const isFave = faveIds.includes(item.id);
+
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.push('Session', [item]);
+                  }}>
+                  <Session__Content
+                    title={item.title}
+                    location={item.location}
+                    isFave={isFave}
+                  />
+                </TouchableOpacity>
+              );
+            }}
+            ItemSeparatorComponent={() => <Separator__Table />}
+          />
+        )}
+      </FavesContext.Consumer>
     );
   }
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {THEME} from '../../config';
 import {Platform} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Session__Content = props => {
   return (
@@ -10,25 +11,36 @@ const Session__Content = props => {
       style={{
         ...THEME.padding.default,
         paddingVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
       }}>
-      <Text
-        style={{
-          ...THEME.typography.header,
-          fontSize: 16,
-          marginVertical: 0,
-          marginBottom: 4,
-        }}>
-        {props.title}
-      </Text>
-      <Text
-        style={{
-          ...THEME.typography.header,
-          fontSize: 14,
-          marginVertical: 0,
-          color: THEME.color.greyM,
-        }}>
-        {props.location}
-      </Text>
+      <View style={{flex: 1}}>
+        <Text
+          style={{
+            ...THEME.typography.header,
+            fontSize: 16,
+            marginVertical: 0,
+            marginBottom: 4,
+          }}>
+          {props.title}
+        </Text>
+        <Text
+          style={{
+            ...THEME.typography.header,
+            fontSize: 14,
+            marginVertical: 0,
+            color: THEME.color.greyM,
+          }}>
+          {props.location}
+        </Text>
+      </View>
+      {props.isFave ? (
+        <Ionicons
+          name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+          size={18}
+          color="red"
+        />
+      ) : null}
     </View>
   );
 };
