@@ -4,7 +4,6 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {About, Faves, Map, Schedule, Session} from '../screens';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import {sharedNavigationOptions} from './config';
 import {THEME} from '../config';
 

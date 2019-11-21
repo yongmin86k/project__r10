@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import {
+  Platform,
   ScrollView,
-  Button,
   View,
   Text,
   TouchableOpacity,
@@ -12,13 +12,20 @@ import {Separator__Table, Typo__Default, Typo__Header} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {THEME} from '../../config';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Session = ({data}) => {
-  console.log(data);
   const time = moment(data.startTime).format('hh:mm A');
   return (
     <ScrollView style={styles.view}>
       <Text style={styles.subHeader}>{data.location}</Text>
+
+      <Icon
+        name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+        size={16}
+        color="red"
+      />
+
       <Typo__Header>{data.title}</Typo__Header>
       <Text style={styles.time}>{time}</Text>
       <Typo__Default>{data.description}</Typo__Default>
@@ -28,8 +35,8 @@ const Session = ({data}) => {
           <Image style={styles.speakerImg} source={{uri: data.speaker.image}} />
           <Text style={styles.speakerName}>{data.speaker.name}</Text>
         </View>
-        <Separator__Table />
       </TouchableOpacity>
+      <Separator__Table />
       <TouchableOpacity
         onPress={() => {
           console.log('Pressed');

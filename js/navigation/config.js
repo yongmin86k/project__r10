@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, View, Platform} from 'react-native';
 import {Header} from 'react-navigation-stack';
 import LinearGradient from 'react-native-linear-gradient';
-
 import {THEME} from '../config';
 
 const GradientHeader = props => (
@@ -17,15 +17,41 @@ const GradientHeader = props => (
   </View>
 );
 
-export const sharedNavigationOptions = navigation => ({
-  headerBackTitle: null,
-  header: props => <GradientHeader {...props} />,
-  headerStyle: {
-    backgroundColor: 'transparent',
-  },
-  headerTitleStyle: {
-    color: THEME.color.white,
-    fontFamily: THEME.typography.fontMain,
-  },
-  headerTintColor: THEME.color.white,
-});
+const defaultOptions = navigation => {
+  const generalOptions = {
+    headerBackTitle: null,
+    header: props => <GradientHeader {...props} />,
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    headerTitleStyle: {
+      color: THEME.color.white,
+      fontFamily: THEME.typography.fontMain,
+    },
+    headerTintColor: THEME.color.white,
+  };
+
+  const options =
+    Platform.OS === 'android' && navigation.state.routeName !== 'Session'
+      ? {
+          ...generalOptions,
+          headerLeft: () => (
+            <Ionicons
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
+              name="md-menu"
+              color="#fff"
+              size={36}
+              style={{marginLeft: 16}}
+            />
+          ),
+        }
+      : {
+          ...generalOptions,
+        };
+
+  return options;
+};
+
+export const sharedNavigationOptions = navigation => defaultOptions(navigation);

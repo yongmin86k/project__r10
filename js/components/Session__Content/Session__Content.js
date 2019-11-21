@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {THEME} from '../../config';
+import {Platform} from 'react-native';
 
 const Session__Content = props => {
   return (
