@@ -2,7 +2,7 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {QUERY_ALL_SESSIONS} from '../../apollo/queries';
 import moment from 'moment';
-import {TouchableOpacity, SectionList} from 'react-native';
+import {TouchableOpacity, SectionList, View} from 'react-native';
 import {
   Separator__Table,
   Session__Header,
@@ -31,33 +31,63 @@ const SessionLists = ({navigation}) => {
           } else {
             formattedData = formatSessionData(data.allSessions);
           }
-          return (
-            <SectionList
-              sections={formattedData}
-              keyExtractor={item => item.id}
-              renderSectionHeader={({section: {title}}) => {
-                const time = moment(title).format('hh:mm A');
-                return <Session__Header>{`${time}`}</Session__Header>;
-              }}
-              renderItem={({item}) => {
-                const isFave = faveIds.includes(item.id);
+          // console.log(formattedData);
+          if (formattedData.length > 0) {
+            return (
+              <SectionList
+                sections={formattedData}
+                keyExtractor={item => item.id}
+                renderSectionHeader={({section: {title}}) => {
+                  const time = moment(title).format('hh:mm A');
+                  return <Session__Header>{`${time}`}</Session__Header>;
+                }}
+                renderItem={({item}) => {
+                  const isFave = faveIds.includes(item.id);
 
-                return (
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push('Session', [item]);
-                    }}>
-                    <Session__Content
-                      title={item.title}
-                      location={item.location}
-                      isFave={isFave}
-                    />
-                  </TouchableOpacity>
-                );
-              }}
-              ItemSeparatorComponent={() => <Separator__Table />}
-            />
-          );
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.push('Session', [item]);
+                      }}>
+                      <Session__Content
+                        title={item.title}
+                        location={item.location}
+                        isFave={isFave}
+                      />
+                    </TouchableOpacity>
+                  );
+                }}
+                ItemSeparatorComponent={() => <Separator__Table />}
+              />
+            );
+          } else if (
+            formattedData.length === 0 &&
+            navigation.state.routeName === 'Faves'
+          ) {
+            return (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Typo__Default>
+                  You haven't faved any sessions yet.
+                </Typo__Default>
+              </View>
+            );
+          } else {
+            return (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Typo__Default>There is no sessions yet.</Typo__Default>
+              </View>
+            );
+          }
         }}
       </FavesContext.Consumer>
     );
