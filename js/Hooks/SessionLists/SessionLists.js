@@ -31,7 +31,7 @@ const SessionLists = ({navigation}) => {
           } else {
             formattedData = formatSessionData(data.allSessions);
           }
-          // console.log(formattedData);
+
           if (formattedData.length > 0) {
             return (
               <SectionList

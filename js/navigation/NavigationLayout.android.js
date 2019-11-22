@@ -93,14 +93,14 @@ export default createDrawerNavigator(
   {
     tabBarOptions: {
       activeTintColor: THEME.color.white,
-      inactiveTintColor: 'rgba(255,255,255,0.4)',
+      inactiveTintColor: THEME.color.greyM,
       labelStyle: {
         fontFamily: THEME.typography.fontMain,
         fontSize: 10,
         paddingBottom: 0,
       },
-      tabStyle: {
-        backgroundColor: 'rgba(0,0,0,0.5)',
+      style: {
+        backgroundColor: THEME.color.black,
       },
     },
   },

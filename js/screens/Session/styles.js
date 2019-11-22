@@ -38,18 +38,6 @@ const styles = StyleSheet.create({
     ...THEME.typography.subHeader,
     color: THEME.color.black,
   },
-  buttonBG: {
-    alignSelf: 'center',
-    marginTop: THEME.spacing * 2,
-    borderRadius: 50,
-  },
-  button: {
-    ...THEME.typography.subHeader,
-    color: THEME.color.white,
-    textAlign: 'center',
-    marginVertical: 10,
-    marginHorizontal: THEME.spacing * 2,
-  },
 });
 
 export default styles;

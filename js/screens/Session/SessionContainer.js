@@ -15,6 +15,7 @@ class SessionContainer extends Component {
       <FavesContext.Consumer>
         {({faveIds, addFaveSession, removeFaveSession}) => (
           <Session
+            navigation={navigation}
             data={params[0]}
             faveIds={faveIds}
             addFaveSession={addFaveSession}

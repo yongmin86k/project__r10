@@ -8,13 +8,22 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Separator__Table, Typo__Default, Typo__Header} from '../../components';
-import LinearGradient from 'react-native-linear-gradient';
+import {
+  BeautifulButton,
+  Separator__Table,
+  Typo__Default,
+  Typo__Header,
+} from '../../components';
 import styles from './styles';
-import {THEME} from '../../config';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Session = ({data, faveIds, addFaveSession, removeFaveSession}) => {
+const Session = ({
+  data,
+  faveIds,
+  addFaveSession,
+  removeFaveSession,
+  navigation,
+}) => {
   const time = moment(data.startTime).format('hh:mm A');
   const isFave = faveIds.includes(data.id);
 
@@ -35,27 +44,31 @@ const Session = ({data, faveIds, addFaveSession, removeFaveSession}) => {
       <Typo__Header>{data.title}</Typo__Header>
       <Text style={styles.time}>{time}</Text>
       <Typo__Default>{data.description}</Typo__Default>
-      <Text style={styles.presentedBy}>Presented by:</Text>
-      <TouchableOpacity>
-        <View style={styles.speakerView}>
-          <Image style={styles.speakerImg} source={{uri: data.speaker.image}} />
-          <Text style={styles.speakerName}>{data.speaker.name}</Text>
-        </View>
-      </TouchableOpacity>
+      {data.speaker ? (
+        <>
+          <Text style={styles.presentedBy}>Presented by:</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Speaker', [data.speaker]);
+            }}>
+            <View style={styles.speakerView}>
+              <Image
+                style={styles.speakerImg}
+                source={{uri: data.speaker.image}}
+              />
+              <Text style={styles.speakerName}>{data.speaker.name}</Text>
+            </View>
+          </TouchableOpacity>
+        </>
+      ) : null}
       <Separator__Table />
       <TouchableOpacity
         onPress={() => {
           !isFave ? addFaveSession(data.id) : removeFaveSession(data.id);
         }}>
-        <LinearGradient
-          colors={[THEME.color.purple, THEME.color.blue]}
-          start={{x: 0.0, y: 1.0}}
-          end={{x: 1.0, y: 0.0}}
-          style={styles.buttonBG}>
-          <Text accessibilityRole="button" style={styles.button}>
-            {!isFave ? 'Add to Faves' : 'Remove from Faves'}
-          </Text>
-        </LinearGradient>
+        <BeautifulButton>
+          {!isFave ? 'Add to Faves' : 'Remove from Faves'}
+        </BeautifulButton>
       </TouchableOpacity>
     </ScrollView>
   );

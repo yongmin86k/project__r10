@@ -41,7 +41,7 @@ const defaultOptions = navigation => {
                 navigation.toggleDrawer();
               }}
               name="md-menu"
-              color="#fff"
+              color={THEME.color.white}
               size={THEME.spacing * 2}
               style={{marginLeft: THEME.spacing}}
             />
