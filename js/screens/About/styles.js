@@ -18,11 +18,6 @@ const styles = StyleSheet.create({
     height: 64,
     resizeMode: 'contain',
   },
-  accordionHeader: {
-    fontFamily: 'Montserrat-Regular',
-    fontSize: 18,
-    color: THEME.color.purple,
-  },
 });
 
 export default styles;

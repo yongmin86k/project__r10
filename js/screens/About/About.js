@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, ImageBackground} from 'react-native';
-import {Typo__Default, Typo__Header} from '../../components';
+import {Typo__Default, Typo__Header, Separator__Table} from '../../components';
 import styles from './styles';
 
 const About = ({CodeOfConducts}) => (
@@ -21,6 +21,7 @@ const About = ({CodeOfConducts}) => (
       </Typo__Default>
       <Typo__Header>Code of Conduct</Typo__Header>
       <CodeOfConducts />
+      <Separator__Table />
       <Typo__Default>© RED Academy 2019</Typo__Default>
     </ScrollView>
   </>
