@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Faves from './Faves';
-import {SessionLists} from '../../Hooks';
+import {SessionLists} from '../../components';
 
 class FavesContainer extends Component {
   render() {

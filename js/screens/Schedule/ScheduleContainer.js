@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Schedule from './Schedule';
-import {SessionLists} from '../../Hooks';
+import {SessionLists} from '../../components';
 
 class ScheduleContainer extends Component {
   render() {
