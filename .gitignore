@@ -60,3 +60,7 @@ buck-out/
 
 .prettierrc.js
 yarn.lock
+**/.global.js
+**/GlobalVar.h
+**/GlobalVar.m
+**/global_vars.xml

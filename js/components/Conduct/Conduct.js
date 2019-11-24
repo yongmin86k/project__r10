@@ -37,7 +37,7 @@ class Conduct extends Component {
       if (animation.finished) {
         this.setState({
           spinValue: new Animated.Value(0),
-          symbol: this.state.symbol === '+' ? '-' : '+',
+          symbol: this.state.isOpen ? '-' : '+',
         });
       }
     });
@@ -60,24 +60,25 @@ class Conduct extends Component {
 
     return (
       <TouchableOpacity onPress={() => this.onPress()}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
           <Animated.Text
             style={{
               ...styles.accordionHeader,
-              width: 20,
+              width: 16,
               textAlign: 'center',
               transform: [{rotate: angle}],
             }}>
             {this.state.symbol}
           </Animated.Text>
 
-          <Text style={{...styles.accordionHeader, marginLeft: THEME.spacing}}>
+          <Text style={{...styles.accordionHeader, marginLeft: 12}}>
             {element.title}
           </Text>
         </View>
         {this.state.isOpen && (
           <Typo__Default>{element.description}</Typo__Default>
         )}
+        {/* marginLeft:s 28 */}
       </TouchableOpacity>
     );
   }
