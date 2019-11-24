@@ -12,6 +12,7 @@ import {
 import {Typo__Default, BeautifulButton} from '../../components';
 import styles from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {THEME} from '../../config';
 
 const Speaker = ({navigation, info}) => {
   return (
@@ -40,6 +41,7 @@ const Speaker = ({navigation, info}) => {
             }}>
             <BeautifulButton>Read More on Wikipedia</BeautifulButton>
           </TouchableOpacity>
+          {Platform.OS && <View style={{height: THEME.spacing * 4}} />}
         </ScrollView>
       </View>
     </SafeAreaView>

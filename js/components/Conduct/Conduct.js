@@ -8,9 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Typo__Default} from '../../components';
 import styles from './styles';
-import {THEME} from '../../config';
 
 class Conduct extends Component {
   constructor(props) {
@@ -45,7 +43,6 @@ class Conduct extends Component {
 
   onPress() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    //   LayoutAnimation.easeInEaseOut;
     this.setState({isOpen: !this.state.isOpen});
     this.spinIcon();
   }
@@ -60,7 +57,7 @@ class Conduct extends Component {
 
     return (
       <TouchableOpacity onPress={() => this.onPress()}>
-        <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
+        <View style={styles.header}>
           <Animated.Text
             style={{
               ...styles.accordionHeader,
@@ -76,9 +73,11 @@ class Conduct extends Component {
           </Text>
         </View>
         {this.state.isOpen && (
-          <Typo__Default>{element.description}</Typo__Default>
+          <View style={styles.description}>
+            <View style={styles.gap} />
+            <Text style={styles.text}>{element.description}</Text>
+          </View>
         )}
-        {/* marginLeft:s 28 */}
       </TouchableOpacity>
     );
   }

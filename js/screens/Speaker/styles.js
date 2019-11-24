@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {THEME} from '../../config';
 
 const styles = StyleSheet.create({
@@ -21,7 +21,14 @@ const styles = StyleSheet.create({
     ...THEME.padding.theme,
     paddingTop: THEME.spacing * 2.5,
     position: 'absolute',
-    bottom: -16,
+    ...Platform.select({
+      ios: {
+        bottom: -THEME.spacing,
+      },
+      android: {
+        bottom: 0,
+      },
+    }),
     left: 0,
     width: '100%',
     height: '100%',
