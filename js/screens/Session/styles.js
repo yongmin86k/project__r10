@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {THEME} from '../../config';
 
 const styles = StyleSheet.create({
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
   speakerName: {
     ...THEME.typography.subHeader,
     color: THEME.color.black,
+  },
+  gap: {
+    height: THEME.spacing * 3,
   },
 });
 

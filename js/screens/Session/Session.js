@@ -69,6 +69,7 @@ const Session = ({
         <BeautifulButton>
           {!isFave ? 'Add to Faves' : 'Remove from Faves'}
         </BeautifulButton>
+        {Platform.OS === 'android' && <View style={styles.gap} />}
       </TouchableOpacity>
     </ScrollView>
   );

@@ -22,7 +22,8 @@ const Speaker = ({navigation, info}) => {
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}>
+          }}
+          style={styles.iconWrap}>
           <Ionicons
             name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
             size={32}
