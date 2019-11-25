@@ -1,14 +1,24 @@
-import React, {Component} from 'react';
-import Schedule from './Schedule';
-import {SessionLists} from '../../components';
+import React, { Component } from "react";
+import { LoaderContext } from "../../context/LoaderContext";
+import Schedule from "./Schedule";
+import { SessionLists } from "../../components";
 
 class ScheduleContainer extends Component {
   render() {
+    const { navigation } = this.props;
     return (
-      <Schedule
-        navigation={this.props.navigation}
-        SessionLists={SessionLists}
-      />
+      <LoaderContext.Consumer>
+        {({ changeLoadingState }) => {
+          navigation.addListener("didBlur", () => {
+            if (changeLoadingState) {
+              changeLoadingState(false);
+            }
+          });
+          return (
+            <Schedule navigation={navigation} SessionLists={SessionLists} />
+          );
+        }}
+      </LoaderContext.Consumer>
     );
   }
 }

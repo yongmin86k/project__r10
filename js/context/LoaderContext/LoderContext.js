@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   ActivityIndicator,
   Platform,
   UIManager,
-  LayoutAnimation,
-} from 'react-native';
-import styles from './styles';
+  LayoutAnimation
+} from "react-native";
+import styles from "./styles";
 
 export const LoaderContext = React.createContext();
 
@@ -14,33 +14,42 @@ class LoaderProvider extends Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: true
     };
 
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       if (UIManager.setLayoutAnimationEnabledExperimental) {
         UIManager.setLayoutAnimationEnabledExperimental(true);
       }
     }
   }
 
-  changeLoadingState = () => {
+  changeLoadingState = value => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setTimeout(() => {
-      this.setState({loading: !this.state.loading});
-    }, 100);
+
+    if (value === true) {
+      setTimeout(() => {
+        this.setState({ loading: false });
+      }, 500);
+    } else {
+      this.setState({ loading: true });
+    }
   };
 
   render() {
     if (this.state.loading) {
       return (
         <LoaderContext.Provider
-          value={{changeLoadingState: this.changeLoadingState}}>
+          value={{
+            loadingState: this.state.loading,
+            changeLoadingState: this.changeLoadingState
+          }}
+        >
           <>
             {this.props.children}
             <ActivityIndicator
               size="large"
-              color={Platform.OS === 'android' ? 'white' : 'gray'}
+              color={Platform.OS === "android" ? "white" : "gray"}
               style={styles.loader}
             />
           </>
@@ -48,7 +57,9 @@ class LoaderProvider extends Component {
       );
     } else {
       return (
-        <LoaderContext.Provider>{this.props.children}</LoaderContext.Provider>
+        <LoaderContext.Provider value={{ loadingState: this.state.loading }}>
+          {this.props.children}
+        </LoaderContext.Provider>
       );
     }
   }
