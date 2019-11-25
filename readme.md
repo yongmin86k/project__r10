@@ -249,6 +249,13 @@ See [Basic Installation Instructions](https://github.com/react-native-community/
 &nbsp;
 
 &nbsp;
+
+## App icons, Splash screens
+![Preview](__preview/_preview_05.jpg)
+
+&nbsp;
+
+&nbsp;
 ## License
 - Structural code is open-sourced under the [MIT license](/LICENSE.md). 
 &nbsp;
