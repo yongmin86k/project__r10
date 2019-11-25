@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   Animated,
   UIManager,
@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   Text,
-  View,
-} from 'react-native';
-import styles from './styles';
+  View
+} from "react-native";
+import styles from "./styles";
+import PropTypes from "prop-types";
 
 class Conduct extends Component {
   constructor(props) {
@@ -17,10 +18,10 @@ class Conduct extends Component {
     this.state = {
       isOpen: false,
       spinValue: new Animated.Value(0),
-      symbol: '+',
+      symbol: "+"
     };
 
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       if (UIManager.setLayoutAnimationEnabledExperimental) {
         UIManager.setLayoutAnimationEnabledExperimental(true);
       }
@@ -30,12 +31,12 @@ class Conduct extends Component {
   spinIcon = () => {
     Animated.timing(this.state.spinValue, {
       duration: 500,
-      toValue: 1,
+      toValue: 1
     }).start(animation => {
       if (animation.finished) {
         this.setState({
           spinValue: new Animated.Value(0),
-          symbol: this.state.isOpen ? '-' : '+',
+          symbol: this.state.isOpen ? "-" : "+"
         });
       }
     });
@@ -43,16 +44,16 @@ class Conduct extends Component {
 
   onPress() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({isOpen: !this.state.isOpen});
+    this.setState({ isOpen: !this.state.isOpen });
     this.spinIcon();
   }
 
   render() {
-    const {element} = this.props;
+    const { element } = this.props;
 
     const angle = this.state.spinValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0deg', '360deg'],
+      outputRange: ["0deg", "360deg"]
     });
 
     return (
@@ -62,13 +63,14 @@ class Conduct extends Component {
             style={{
               ...styles.accordionHeader,
               width: 16,
-              textAlign: 'center',
-              transform: [{rotate: angle}],
-            }}>
+              textAlign: "center",
+              transform: [{ rotate: angle }]
+            }}
+          >
             {this.state.symbol}
           </Animated.Text>
 
-          <Text style={{...styles.accordionHeader, marginLeft: 12}}>
+          <Text style={{ ...styles.accordionHeader, marginLeft: 12 }}>
             {element.title}
           </Text>
         </View>
@@ -84,3 +86,12 @@ class Conduct extends Component {
 }
 
 export default Conduct;
+
+Conduct.propTypes = {
+  element: PropTypes.shape({
+    description: PropTypes.string,
+    id: PropTypes.string,
+    order: PropTypes.number,
+    title: PropTypes.string
+  })
+};

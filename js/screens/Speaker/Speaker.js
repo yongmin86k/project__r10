@@ -1,5 +1,5 @@
-import React from 'react';
-import SafeAreaView from 'react-native-safe-area-view';
+import React from "react";
+import SafeAreaView from "react-native-safe-area-view";
 import {
   Platform,
   ScrollView,
@@ -7,14 +7,15 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  Linking,
-} from 'react-native';
-import {Typo__Default, BeautifulButton} from '../../components';
-import styles from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {THEME} from '../../config';
+  Linking
+} from "react-native";
+import { Typo__Default, BeautifulButton } from "../../components";
+import styles from "./styles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { THEME } from "../../config";
+import PropTypes from "prop-types";
 
-const Speaker = ({navigation, info}) => {
+const Speaker = ({ navigation, info }) => {
   return (
     <SafeAreaView style={styles.safeView}>
       <View style={styles.header}>
@@ -23,9 +24,10 @@ const Speaker = ({navigation, info}) => {
           onPress={() => {
             navigation.goBack();
           }}
-          style={styles.iconWrap}>
+          style={styles.iconWrap}
+        >
           <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
+            name={Platform.OS === "ios" ? "ios-close" : "md-close"}
             size={32}
             color="white"
           />
@@ -33,16 +35,17 @@ const Speaker = ({navigation, info}) => {
       </View>
       <View style={styles.modalView}>
         <ScrollView style={styles.modalWrap}>
-          <Image source={{uri: info.image}} style={styles.speakerImg} />
+          <Image source={{ uri: info.image }} style={styles.speakerImg} />
           <Text style={styles.infoName}>{info.name}</Text>
           <Typo__Default>{info.bio}</Typo__Default>
           <TouchableOpacity
             onPress={() => {
               Linking.openURL(info.url);
-            }}>
+            }}
+          >
             <BeautifulButton>Read More on Wikipedia</BeautifulButton>
           </TouchableOpacity>
-          {Platform.OS && <View style={{height: THEME.spacing * 4}} />}
+          {Platform.OS && <View style={{ height: THEME.spacing * 4 }} />}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -50,3 +53,14 @@ const Speaker = ({navigation, info}) => {
 };
 
 export default Speaker;
+
+Speaker.propTypes = {
+  info: PropTypes.shape({
+    bio: PropTypes.string,
+    id: PropTypes.string,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    session: PropTypes.object,
+    url: PropTypes.string
+  })
+};
